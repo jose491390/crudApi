@@ -56,3 +56,25 @@ export const registrarProducto = async (req, res) => {
     res.status(500).send('Error al registrar el producto');
   }
 };
+
+// Eliminar un producto por ID
+export const eliminarProducto = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Verifica si el producto existe antes de intentar eliminarlo
+    const [productoExistente] = await pool.execute('SELECT * FROM tablaproducto WHERE id = ?', [id]);
+
+    if (productoExistente.length === 0) {
+      return res.status(404).send('Producto no encontrado');
+    }
+
+    // Realiza la eliminación en la base de datos
+    await pool.execute('DELETE FROM tablaproducto WHERE id = ?', [id]);
+
+    res.status(200).send('Producto eliminado exitosamente');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al eliminar el producto');
+  }
+};
