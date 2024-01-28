@@ -12,7 +12,7 @@ CREATE TABLE tablaproducto (
     nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
     precioUnidadCompra INT(50),
-    precioUnidadVente INT(50)
+    precioUnidadVenta INT(50)
 );
 
 -- con este comando vemos la estructura de la tabla
